@@ -6,6 +6,7 @@ const userCollection = {
 
 const userCreate = async (item) => {
   await create(userCollection.Users, item);
+  return item;
 }
 
 export {

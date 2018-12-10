@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {userCreate} from "../APIs/apiService.js"
+import {userCreate} from "../APIs/apiService.js";
+import { userCreation } from "../redux/actions/Authorization";
+import { connect } from 'react-redux';
 
 
 class RegisterForm extends Component {
@@ -24,14 +26,11 @@ class RegisterForm extends Component {
 
   createUser = (event) => {
     event.preventDefault();
-    var user = {
-      user: this.state.userName,
-      userEmail: this.state.email,
-      userPassword: this.state.password
+
+    if(this.state.password != this.state.cPassword){
+      alert('Passwords do not match!')
     }
-    if(this.state.password === this.state.cPassword){
-      userCreate(user);
-    }
+    this.props.userCreation(this.state);
 }
 
   render() {
@@ -63,4 +62,17 @@ class RegisterForm extends Component {
     );
   }
 }
-export default RegisterForm;
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    userCreation: (user) => dispatch(userCreation(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
