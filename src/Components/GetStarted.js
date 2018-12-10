@@ -1,12 +1,21 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 const GetStarted = () => (
       <div className="main">
         <div className="header">
           <div className="menu">
             <ul>
-              <li><button className="round-btn">Login</button></li>
-              <li><button className="round-btn">Register</button></li>
+              <li>
+                <NavLink to = "/Login">
+                  <button className="round-btn">Login</button>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to = "/Register">
+                  <button className="round-btn">Register</button>
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
