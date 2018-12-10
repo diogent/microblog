@@ -11,10 +11,9 @@ const openConnection = (collectionName) => {
   const dbPromise = idb.open(dbName, 1, upgradeDb => {
     if (!upgradeDb.objectStoreNames.contains(collectionName)) { //cheked that collection is not exists
       var store = upgradeDb.createObjectStore(collectionName, {
-        keyPath: 'id',
-        autoIncrement: true
+        keyPath: 'userName'
       }); //creates collection
-      store.createIndex('id', 'id', {
+      store.createIndex('userName', 'userName', {
         unique: true
       }); //creates index
     }
