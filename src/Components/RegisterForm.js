@@ -8,10 +8,10 @@ class RegisterForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userName: undefined,
-      email: undefined,
-      password: undefined,
-      cPassword: undefined
+      userName: '',
+      email: '',
+      password: '',
+      cPassword: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -27,7 +27,7 @@ class RegisterForm extends Component {
   createUser = (event) => {
     event.preventDefault();
 
-    if(this.state.password != this.state.cPassword){
+    if(this.state.password !== this.state.cPassword){
       alert('Passwords do not match!')
     }
     this.props.userCreation(this.state);
@@ -50,13 +50,13 @@ class RegisterForm extends Component {
             </div>
 
             <div className="form__group">
-                <input type="password"  name = "password" placeholder="Password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'password')}/>
+                <input type="password"  name="password" placeholder="Password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'password')}/>
             </div>
 
             <div className="form__group">
-                <input type="password"  name = "cPassword" placeholder="Confirm password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'cPassword')}/>
+                <input type="password"  name="cPassword" placeholder="Confirm password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'cPassword')}/>
             </div>
-            <button className="btn"  type = "submit">Register</button>
+            <button className="btn"  type="submit">Register</button>
         </form>
     </div>
     );
