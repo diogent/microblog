@@ -21,23 +21,24 @@ const openConnection = (collectionName) => {
   return dbPromise;
 };
 
-async function get(collectionName, user) {
+
+async function get(collectionName, id) {
   let db = await openConnection(collectionName);
   let tx = db.transaction(collectionName, transactionScope.read);
   let store = tx.objectStore(collectionName); //gets collection
 
-  let item = await store.get(user.userName);
+  let item = await store.get(id);
   db.close();
 
   return item;
 };
 
-async function create(collectionName, item) {
+async function create(collectionName, user) {
   let db = await openConnection(collectionName);
   var tx = db.transaction(collectionName, transactionScope.readwrite);
   var store = tx.objectStore(collectionName); //gets collection
 
-  store.put(item);
+  store.put(user);
   await tx.complete;
   db.close();
 }

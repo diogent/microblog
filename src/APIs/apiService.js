@@ -10,7 +10,7 @@ const userCreate = async (user) => {
 }
 
 const userLogin = async (user) => {
-  const existingUser = await get(userCollection.Users, user);
+  const existingUser = await get(userCollection.Users, user.userName);
   if (existingUser && existingUser.password === user.password) {
     return existingUser;
   }
