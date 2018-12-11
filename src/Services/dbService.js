@@ -21,12 +21,12 @@ const openConnection = (collectionName) => {
   return dbPromise;
 };
 
-async function get(id, collectionName) {
+async function get(collectionName, user) {
   let db = await openConnection(collectionName);
   let tx = db.transaction(collectionName, transactionScope.read);
   let store = tx.objectStore(collectionName); //gets collection
 
-  let item = await store.get(id);
+  let item = await store.get(user.userName);
   db.close();
 
   return item;
