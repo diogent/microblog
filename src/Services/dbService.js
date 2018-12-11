@@ -21,7 +21,8 @@ const openConnection = (collectionName) => {
   return dbPromise;
 };
 
-async function get(id, collectionName) {
+
+async function get(collectionName, id) {
   let db = await openConnection(collectionName);
   let tx = db.transaction(collectionName, transactionScope.read);
   let store = tx.objectStore(collectionName); //gets collection

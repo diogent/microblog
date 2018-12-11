@@ -63,16 +63,10 @@ class RegisterForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.auth.user
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     userCreation: (user) => dispatch(userCreation(user))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default connect(null, mapDispatchToProps)(RegisterForm);

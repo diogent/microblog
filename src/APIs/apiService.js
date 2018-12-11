@@ -4,11 +4,19 @@ const userCollection = {
   Users: 'User'
 }
 
-const userCreate = async (item) => {
-  await create(userCollection.Users, item);
-  return item;
+const userCreate = async (user) => {
+  await create(userCollection.Users, user);
+  return user;
+}
+
+const userLogin = async (user) => {
+  const existingUser = await get(userCollection.Users, user.userName);
+  if (existingUser && existingUser.password === user.password) {
+    return existingUser;
+  }
 }
 
 export {
-  userCreate
+  userCreate,
+  userLogin
 }
