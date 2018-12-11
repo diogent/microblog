@@ -33,12 +33,12 @@ async function get(collectionName, id) {
   return item;
 };
 
-async function create(collectionName, user) {
+async function create(collectionName, item) {
   let db = await openConnection(collectionName);
   var tx = db.transaction(collectionName, transactionScope.readwrite);
   var store = tx.objectStore(collectionName); //gets collection
 
-  store.put(user);
+  store.put(item);
   await tx.complete;
   db.close();
 }
