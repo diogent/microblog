@@ -8,7 +8,13 @@ const registerSuccess = user => ({type: actions.register, user});
 const registerFailed = () => ({type: actions.registerFailed})
 
 export const userCreation = user => dispatch => {
-    return userCreate(user).then(res => dispatch(registerSuccess(res)));
+    return userCreate(user).then(res => {
+      if (res) {
+        dispatch(registerSuccess(res));
+      }else{
+        dispatch(registerFailed());
+      }
+    });
 };
 
 export const uLogin = user => dispatch => {
@@ -17,6 +23,7 @@ export const uLogin = user => dispatch => {
       dispatch(loginSuccess(res));
     }else{
       alert('Login failed');
+      dispatch(loginFailed());
     }
   });
 };
