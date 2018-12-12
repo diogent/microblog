@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {userCreate} from "../APIs/apiService.js";
 import { userCreation } from "../redux/actions/Authorization";
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import {NavLink} from 'react-router-dom';
 
 
 class RegisterForm extends Component {
@@ -36,10 +38,12 @@ class RegisterForm extends Component {
   render() {
     return (
       <div className="user">
+        <NavLink to="/Login">
+          <button className="round-btn">Login</button>
+        </NavLink>
         <header className="user__header">
             <h1 className="user__title">Sign-up</h1>
         </header>
-
         <form className="form" onSubmit = {this.createUser}>
             <div className="form__group">
                 <input type="text"  placeholder="Username" className="form__input" onChange = {(event) => this.handleInputChange(event, 'userName')}/>
@@ -57,9 +61,17 @@ class RegisterForm extends Component {
                 <input type="password"  name="cPassword" placeholder="Confirm password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'cPassword')}/>
             </div>
             <button className="btn"  type="submit">Register</button>
+            {this.props.registerSuccess && <Redirect to='/Login'/>}
         </form>
     </div>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    registerSuccess: state.auth.registerSuccess
   }
 }
 
@@ -69,4 +81,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(RegisterForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

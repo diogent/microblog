@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { userLogin } from "../APIs/apiService.js";
 import { uLogin } from "../redux/actions/Authorization";
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+
 
 
 class Login extends Component {
@@ -25,6 +27,7 @@ class Login extends Component {
   onLogin = event => {
     event.preventDefault();
     this.props.uLogin(this.state);
+
   }
 
   render() {
@@ -45,6 +48,7 @@ class Login extends Component {
             </div>
 
             <button className="btn" type="submit" >Login</button>
+            {this.props.loginSuccess && <Redirect to='/'/>}
         </form>
     </div>
     );
