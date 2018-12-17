@@ -5,8 +5,12 @@ const userCollection = {
 }
 
 const userCreate = async (user) => {
-  await create(userCollection.Users, user);
-  return user;
+  const checkIfExists = await get(userCollection.Users, user.userName);
+  if (!checkIfExists) {
+    await create(userCollection.Users, user);
+    const registeredUser = await get(userCollection.Users, user.userName);
+    return registeredUser;
+  }
 }
 
 const userLogin = async (user) => {
