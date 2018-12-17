@@ -29,33 +29,27 @@ class RegisterForm extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.createUser = this.createUser.bind(this);
-    this.registerIsValid = this.registerIsValid.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
-  registerIsValid() {
-    let formIsValid = true;
-    if(!this.state.userName.value){
-      formIsValid = false;
-      this.setState({userName: {error: "Enter user name"}});
-    }
-    if(!this.state.email.value){
-      formIsValid = false;
-      this.setState({email: {error: "Enter email"}});
-    }
-    if(!this.state.password.value){
-      formIsValid = false;
-      this.setState({password: {error: "Enter password"}});
-    }
-    if(!this.state.cPassword.value){
-      formIsValid = false;
-      this.setState({cPassword: {error: "Enter password confirmation"}});
+
+  validateForm() {
+    let isValid = true;
+    for (var property in this.state) {
+    if (this.state.hasOwnProperty(property)) {
+        if (!this.state[property].value) {
+          isValid = false;
+          this.setState({[property]: {...this.state[property], error: `Enter ${property}`}});
+        }
+      }
     }
     if(this.state.password.value !== this.state.cPassword.value){
-      formIsValid = false;
-      alert('Passwords do not match!')
+      isValid = false;
+      this.setState({cPassword: {...this.state.user, error: "Passwords do not match!"}});
     }
-    return formIsValid;
+    return isValid;
   }
+
 
   handleInputChange(event, name) {
     const value = event.target.value;
@@ -64,9 +58,10 @@ class RegisterForm extends Component {
     });
   }
 
+
   createUser = (event) => {
     event.preventDefault();
-    var isValid = this.registerIsValid();
+    let isValid = this.validateForm();
     if(isValid) {
         let user = {
           userName: this.state.userName.value,
@@ -89,28 +84,27 @@ class RegisterForm extends Component {
         <form className="form" onSubmit={this.createUser}>
             <div className="form__group">
                 <input type="text"  placeholder="Username" className="form__input" onChange={(event) => this.handleInputChange(event, 'userName')}/>
+                <p>{this.state.userName.error}</p>
             </div>
 
             <div className="form__group">
                 <input type="email"  placeholder="Email" className="form__input" onChange={(event) => this.handleInputChange(event, 'email')}/>
+                <p>{this.state.email.error}</p>
             </div>
 
             <div className="form__group">
                 <input type="password"  name="password" placeholder="Password" className="form__input" onChange={(event) => this.handleInputChange(event, 'password')}/>
+                <p>{this.state.password.error}</p>
             </div>
 
             <div className="form__group">
                 <input type="password"  name="cPassword" placeholder="Confirm password" className="form__input" onChange={(event) => this.handleInputChange(event, 'cPassword')}/>
+                <p>{this.state.cPassword.error}</p>
             </div>
             <button className="btn"  type="submit">Register</button>
-            {this.props.registerSuccess && <Redirect to='/Login'/>}
+            <p>{this.props.error}</p>
+            { this.props.registerSuccess &&  <Redirect to="/Login"/> }
         </form>
-        <div>
-          <p>{this.state.userName.error}</p>
-          <p>{this.state.email.error}</p>
-          <p>{this.state.password.error}</p>
-          <p>{this.state.cPassword.error}</p>
-        </div>
     </div>
     );
   }
@@ -119,6 +113,7 @@ class RegisterForm extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    error: state.error.error,
     registerSuccess: state.auth.registerSuccess
   }
 }

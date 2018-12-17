@@ -48,7 +48,8 @@ class Login extends Component {
             </div>
 
             <button className="btn" type="submit" >Login</button>
-            {this.props.loginSuccess && <Redirect to='/'/>}
+            <p>{this.props.error}</p>
+            {this.props.loginSuccess && <Redirect to='/Feed'/>}
         </form>
     </div>
     );
@@ -58,6 +59,7 @@ class Login extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    error: state.error.error,
     loginSuccess: state.auth.loginSuccess
   }
 }
