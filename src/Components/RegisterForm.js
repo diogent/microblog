@@ -70,9 +70,12 @@ class RegisterForm extends Component {
       }
       this.props.userCreation(user);
     }
-}
+  }
 
   render() {
+    if (this.props.registerSuccess) {
+      return <Redirect to='/Login' />
+    }
     return (
       <div className="user">
         <NavLink to="/Login">
@@ -103,7 +106,6 @@ class RegisterForm extends Component {
             </div>
             <button className="btn"  type="submit">Register</button>
             <p>{this.props.error}</p>
-            { this.props.registerSuccess &&  <Redirect to="/Login"/> }
         </form>
     </div>
     );
