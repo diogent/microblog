@@ -3,6 +3,7 @@ const actions = {
   register: "REGISTER",
   registerSuccess: "REGISTER_SUCCESS",
   loginSuccess: "LOGIN_SUCCEDED",
-  error: "ERROR"
+  error: "ERROR",
+  createPost: "CREATE_POST"
 }
 export default actions;

@@ -12,7 +12,7 @@ export const userCreation = user => dispatch => {
     return userCreate(user).then(res => {
       if (res) {
         dispatch(registerSuccess(res));
-      }else{
+      } else {
         dispatch(error(errors.registerCommon));
       }
     });

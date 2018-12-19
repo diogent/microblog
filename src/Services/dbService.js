@@ -1,5 +1,10 @@
 import idb from 'idb';
 
+const collections = {
+  Users: 'User',
+  Posts: 'Posts'
+}
+
 const transactionScope = {
   read: 'readonly',
   readwrite: 'readwrite'
@@ -9,14 +14,22 @@ const dbName = "microblog-db";
 
 const openConnection = (collectionName) => {
   const dbPromise = idb.open(dbName, 1, upgradeDb => {
-    if (!upgradeDb.objectStoreNames.contains(collectionName)) { //cheked that collection is not exists
-      var store = upgradeDb.createObjectStore(collectionName, {
-        keyPath: 'userName'
-      }); //creates collection
-      store.createIndex('userName', 'userName', {
-        unique: true
-      }); //creates index
-    }
+    if (!upgradeDb.objectStoreNames.contains(collections.Users)) { //cheked that collection is not exists
+          var store = upgradeDb.createObjectStore(collections.Users, {
+            keyPath: 'userName'
+          }); //creates collection
+          store.createIndex('userName', 'userName', {
+            unique: true
+          }); //creates index
+        }
+  if (!upgradeDb.objectStoreNames.contains(collections.Posts)) {
+          var store = upgradeDb.createObjectStore(collections.Posts, {
+            autoIncrement: true
+          }); //creates collection
+          store.createIndex('postId', 'Id', {
+            unique: true
+          }); //creates index
+        }
   });
   return dbPromise;
 };
