@@ -26,14 +26,14 @@ const postCreate = async (post) => {
   return post;
 }
 
-const getPostsFromDb = async (user) => {
+const getPostsByUserName = async (userName) => {
   const posts = await getAllData(collections.Posts);
-  return posts.filter(user => user.userName === user);
+  return posts.filter(post => post.userName === userName);
 }
 
 export {
   userCreate,
   userLogin,
   postCreate,
-  getPostsFromDb
+  getPostsByUserName
 }

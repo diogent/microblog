@@ -1,25 +1,25 @@
 import actions from "../constants/constActions";
 import errors from "../constants/errors";
-import {postCreate, getPostsFromDb} from "../../APIs/apiService"
+import {postCreate, getPostsByUserName} from "../../APIs/apiService"
 
-const createPost = post => ({type: actions.createPost, post});
+const postCreation = post => ({type: actions.createPost, post});
 const error = errorMessage => ({type: actions.error, error: errorMessage});
 const postsRequested = () => ({type: actions.postsReq});
 const postsRecieved = posts => ({type: actions.postsRec, payload: posts});
 
-export const postCreation = post => dispatch => {
+export const createPost = post => dispatch => {
   return postCreate(post).then(res => {
     if (res) {
-      dispatch(createPost(res));
+      dispatch(postCreation(res));
     } else {
       dispatch(error(errors.postCommon));
     }
   });
 }
 
-export const getPosts = () => dispatch => {
+export const getPostsByUser = (userName) => dispatch => {
   dispatch(postsRequested());
-  return getPostsFromDb(user).then(res => {
+  return getPostsByUserName(userName).then(res => {
     if (res) {
       dispatch(postsRecieved(res));
     } else {

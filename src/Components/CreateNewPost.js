@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import Post from './Post';
-import { postCreation, getPosts } from "../redux/actions/CreatePost";
+import { createPost, getPostsByUser } from "../redux/actions/CreatePost";
 
 class CreateNewPost extends Component {
   constructor(props){
@@ -19,7 +18,7 @@ class CreateNewPost extends Component {
   }
 
   getImageBase64(event) {
-   var file = event.target.files[0]
+   let file = event.target.files[0]
    let reader = new FileReader()
    reader.readAsDataURL(file)
    reader.onload = () => {
@@ -50,7 +49,7 @@ class CreateNewPost extends Component {
       image: this.state.image,
       date: dateOfPost
     };
-    this.props.postCreation(completePost);
+    this.props.createPost(completePost);
   }
 
   componentDidMount() {
@@ -119,8 +118,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postCreation: (post) => dispatch(postCreation(post)),
-    getFilteredByUser: (user) => dispatch(getPosts(user))
+    createPost: (post) => dispatch(createPost(post)),
+    getFilteredByUser: (userName) => dispatch(getPostsByUser(userName))
   }
 }
 
