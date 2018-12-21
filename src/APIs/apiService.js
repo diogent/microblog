@@ -1,4 +1,4 @@
-import { get, create } from '../Services/dbService';
+import { get, create, getAllData } from '../Services/dbService';
 
 const collections = {
   Users: 'User',
@@ -26,8 +26,14 @@ const postCreate = async (post) => {
   return post;
 }
 
+const getPostsFromDb = async (user) => {
+  const posts = await getAllData(collections.Posts);
+  return posts.filter(user => user.userName === user);
+}
+
 export {
   userCreate,
   userLogin,
-  postCreate
+  postCreate,
+  getPostsFromDb
 }

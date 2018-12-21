@@ -34,6 +34,16 @@ const openConnection = (collectionName) => {
   return dbPromise;
 };
 
+async function getAllData(collectionName) {
+  let db = await openConnection(collectionName);
+  let tx = db.transaction(collectionName, transactionScope.read);
+  let store = tx.objectStore(collectionName); //gets collection
+
+  let items = await store.getAll();
+  db.close();
+
+  return items;
+};
 
 async function get(collectionName, id) {
   let db = await openConnection(collectionName);
@@ -58,5 +68,6 @@ async function create(collectionName, item) {
 
 export {
   get,
-  create
+  create,
+  getAllData
 }
