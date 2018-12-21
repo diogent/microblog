@@ -1,26 +1,39 @@
-import { get, create } from '../Services/dbService';
+import { get, create, getAllData } from '../Services/dbService';
 
-const userCollection = {
-  Users: 'User'
+const collections = {
+  Users: 'User',
+  Posts: 'Posts'
 }
 
 const userCreate = async (user) => {
-  const checkIfExists = await get(userCollection.Users, user.userName);
+  const checkIfExists = await get(collections.Users, user.userName);
   if (!checkIfExists) {
-    await create(userCollection.Users, user);
-    const registeredUser = await get(userCollection.Users, user.userName);
+    await create(collections.Users, user);
+    const registeredUser = await get(collections.Users, user.userName);
     return registeredUser;
   }
 }
 
 const userLogin = async (user) => {
-  const existingUser = await get(userCollection.Users, user.userName);
+  const existingUser = await get(collections.Users, user.userName);
   if (existingUser && existingUser.password === user.password) {
     return existingUser;
   }
 }
 
+const postCreate = async (post) => {
+  const newPost = await create(collections.Posts, post);
+  return post;
+}
+
+const getPostsByUserName = async (userName) => {
+  const posts = await getAllData(collections.Posts);
+  return posts.filter(post => post.userName === userName);
+}
+
 export {
   userCreate,
-  userLogin
+  userLogin,
+  postCreate,
+  getPostsByUserName
 }

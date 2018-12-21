@@ -32,7 +32,7 @@ class Login extends Component {
 
   render() {
     if (this.props.loginSuccess) {
-      return <Redirect to='/Feed' />
+      return <Redirect to='/CreateNewPost' />
     }
     return (
       <div className="user">
@@ -51,8 +51,8 @@ class Login extends Component {
             </div>
 
             <button className="btn" type="submit" >Login</button>
-            <p>{this.props.error}</p>
         </form>
+        <p>{this.props.error}</p>
     </div>
     );
   }
