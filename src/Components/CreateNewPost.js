@@ -89,7 +89,7 @@ class CreateNewPost extends Component {
         <form >
           <div>
             <label> Text </label>
-            <input type="text" onChange={(event) => this.handleInputChange(event, 'post')}/>
+            <textarea type="text" onChange={(event) => this.handleInputChange(event, 'post')}/>
           </div>
           <div>
             <input type="file" name="imgUpload" accept='.png' onChange={this.getImageBase64} />

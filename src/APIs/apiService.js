@@ -28,12 +28,18 @@ const postCreate = async (post) => {
 
 const getPostsByUserName = async (userName) => {
   const posts = await getAllData(collections.Posts);
-  return posts.filter(post => post.userName === userName);
+  return posts.filter(post => post.userName === userName).reverse();
+}
+
+const getPosts = async () => {
+  const posts = await getAllData(collections.Posts);
+  return posts.reverse();
 }
 
 export {
   userCreate,
   userLogin,
   postCreate,
-  getPostsByUserName
+  getPostsByUserName,
+  getPosts
 }
