@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAll } from "../redux/actions/CreatePost";
-import '../Styles/Feed.scss';
 
 class Feed extends Component {
 

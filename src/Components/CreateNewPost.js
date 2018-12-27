@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import { createPost, getPostsByUser } from "../redux/actions/CreatePost";
-import '../Styles/Feed.scss';
+import "../Styles/CreateNewPostStyles/create-form-styles.scss";
+import "../Styles/PostStyles/main-container.scss";
+import "../Styles/PostStyles/post-styles.scss";
+import "../Styles/ButtonStyles/button-primary.scss";
 
 class CreateNewPost extends Component {
   constructor(props){

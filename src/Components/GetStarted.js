@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import '../Styles/Feed.scss';
+import "../Styles/StartPageStyles/start-page-container.scss";
 
 const GetStarted = () => (
       <div className="container__startpage">

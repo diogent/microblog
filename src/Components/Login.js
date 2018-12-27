@@ -3,6 +3,7 @@ import { userLogin } from "../APIs/apiService.js";
 import { uLogin } from "../redux/actions/Authorization";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import "../Styles/AuthorizationStyles/authorization-styles.scss";
 
 
 
