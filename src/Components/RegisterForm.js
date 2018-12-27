@@ -77,37 +77,32 @@ class RegisterForm extends Component {
       return <Redirect to='/Login' />
     }
     return (
-      <div className="user">
-        <NavLink to="/Login">
-          <button className="round-btn">Login</button>
-        </NavLink>
-        <header className="user__header">
-            <h1 className="user__title">Sign-up</h1>
-        </header>
-        <form className="form" onSubmit={this.createUser}>
-            <div className="form__group">
-                <input type="text"  placeholder="Username" className="form__input" onChange={(event) => this.handleInputChange(event, 'userName')}/>
-                <p>{this.state.userName.error}</p>
-            </div>
 
+        <div className="user">
+          <header className="user__header">
+            <h1 className="user__title">Registration</h1>
+          </header>
+          <form className="form" onSubmit={this.createUser}>
             <div className="form__group">
-                <input type="email"  placeholder="Email" className="form__input" onChange={(event) => this.handleInputChange(event, 'email')}/>
-                <p>{this.state.email.error}</p>
+              <input type="text" placeholder="Username" className="form__input" onChange={(event) => this.handleInputChange(event, 'userName')}/>
+              <p className="errors_messages">{this.state.userName.error}</p>
             </div>
-
             <div className="form__group">
-                <input type="password"  name="password" placeholder="Password" className="form__input" onChange={(event) => this.handleInputChange(event, 'password')}/>
-                <p>{this.state.password.error}</p>
+              <input type="email" placeholder="Email" className="form__input" onChange={(event) => this.handleInputChange(event, 'email')}/>
+              <p className="errors_messages">{this.state.email.error}</p>
             </div>
-
             <div className="form__group">
-                <input type="password"  name="cPassword" placeholder="Confirm password" className="form__input" onChange={(event) => this.handleInputChange(event, 'cPassword')}/>
-                <p>{this.state.cPassword.error}</p>
+              <input type="password" placeholder="Password" className="form__input" onChange={(event) => this.handleInputChange(event, 'password')}/>
+              <p className="errors_messages">{this.state.password.error}</p>
             </div>
-            <button className="btn"  type="submit">Register</button>
-            <p>{this.props.error}</p>
-        </form>
-    </div>
+            <div className="form__group">
+              <input type="password" placeholder="Password" className="form__input" onChange={(event) => this.handleInputChange(event, 'cPassword')}/>
+              <p className="errors_messages">{this.state.cPassword.error}</p>
+              <p className="errors_messages">{this.props.error}</p>
+            </div>
+            <button className="btn" type="submit">Register</button>
+          </form>
+        </div>
     );
   }
 }

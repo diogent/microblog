@@ -7,7 +7,6 @@ import CreateNewPost from "./Components/CreateNewPost";
 import Feed from "./Components/Feed";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.scss';
-import './Styles/AuthorizationStyles.scss';
 
 class App extends Component {
   render() {

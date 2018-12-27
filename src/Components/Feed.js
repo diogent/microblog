@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAll } from "../redux/actions/CreatePost";
+import '../Styles/Feed.scss';
 
 class Feed extends Component {
 
@@ -10,17 +11,17 @@ class Feed extends Component {
   }
 
   displayPosts() {
-    return this.props.posts.items.map(post => {
+    return this.props.posts.map(post => {
       return (
-        <div>
-          <div>
+        <div className="post" key={post.id}>
+          <div className="post__name">
             @{post.userName}
           </div>
-          <div>
+          <div className="post__content">
             <p>{post.post}</p>
           </div>
-            <img src={post.image}/>
-            <div>{post.date}</div>
+            <img src={post.image} className="post__image"/>
+            <div className="post__date">{post.date}</div>
         </div>
 
       );
@@ -29,29 +30,25 @@ class Feed extends Component {
 
   render(){
 
-    const { isLoading } = this.props.posts;
-
-    if (isLoading) {
+    if (this.props.isLoading) {
       return <div>Loading...</div>
     }
 
     return (
-      <div>
+      <div className="container">
         <NavLink to="/CreateNewPost">
-          <button className="round-btn">CreateNewPost</button>
+          <button className="button">Create new post</button>
         </NavLink>
-        <div>{this.displayPosts()}</div>
+        <div className="posts_container">{this.displayPosts()}</div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ post: {isLoading, posts} }) => {
   return {
-    posts: {
-      isLoading: state.post.isLoading,
-      items: state.post.posts
-    }
+    posts,
+    isLoading
   }
 }
 
