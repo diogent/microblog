@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAll } from "../redux/actions/CreatePost";
+import Container from "./Container";
 
 class Feed extends Component {
 
@@ -34,12 +35,12 @@ class Feed extends Component {
     }
 
     return (
-      <div className="container">
+      <Container>
         <NavLink to="/CreateNewPost">
           <button className="button">Create new post</button>
         </NavLink>
         <div className="posts_container">{this.displayPosts()}</div>
-      </div>
+      </Container>
     );
   }
 }

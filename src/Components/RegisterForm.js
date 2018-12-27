@@ -4,7 +4,7 @@ import { userCreation } from "../redux/actions/Authorization";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import "../Styles/AuthorizationStyles/authorization-styles.scss";
+import "../Styles/Authorization/authorization.scss";
 
 
 class RegisterForm extends Component {

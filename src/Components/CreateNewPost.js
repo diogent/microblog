@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import { createPost, getPostsByUser } from "../redux/actions/CreatePost";
-import "../Styles/CreateNewPostStyles/create-form-styles.scss";
-import "../Styles/PostStyles/main-container.scss";
-import "../Styles/PostStyles/post-styles.scss";
-import "../Styles/ButtonStyles/button-primary.scss";
+import Container from "./Container";
 
 class CreateNewPost extends Component {
   constructor(props){
@@ -84,12 +81,12 @@ class CreateNewPost extends Component {
     }
 
     return (
-      <div className="container">
+      <Container>
         <NavLink to = "/Feed">
           <button className="button">Feed</button>
         </NavLink>
         <div className="post">
-          <form>
+          <form className="form">
             <div>
               <label className="post__name"> Text </label>
             </div>
@@ -106,7 +103,7 @@ class CreateNewPost extends Component {
         </div>
 
         <div>{this.displayPosts()}</div>
-      </div>
+      </Container>
     );
   }
 }
