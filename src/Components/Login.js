@@ -3,6 +3,7 @@ import { userLogin } from "../APIs/apiService.js";
 import { uLogin } from "../redux/actions/Authorization";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import "../Styles/Authorization/authorization.scss";
 
 
 
@@ -37,23 +38,19 @@ class Login extends Component {
     return (
       <div className="user">
         <header className="user__header">
-            <h1 className="user__title">Login</h1>
+          <h1 className="user__title">Login</h1>
         </header>
-
         <form className="form" onSubmit={this.onLogin}>
-
-            <div className="form__group">
-                <input type="text" placeholder="Username" className="form__input" onChange = {(event) => this.handleInputChange(event, 'userName')}/>
-            </div>
-
-            <div className="form__group">
-                <input type="password" placeholder="Password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'password')}/>
-            </div>
-
-            <button className="btn" type="submit" >Login</button>
+          <div className="form__group">
+            <input type="text" placeholder="Username" className="form__input" onChange = {(event) => this.handleInputChange(event, 'userName')}/>
+          </div>
+          <div className="form__group">
+            <input type="password" placeholder="Password" className="form__input" onChange = {(event) => this.handleInputChange(event, 'password')}/>
+            <p className="errors_messages">{this.props.error}</p>
+          </div>
+          <button className="btn" type="submit" >Login</button>
         </form>
-        <p>{this.props.error}</p>
-    </div>
+      </div>
     );
   }
 }

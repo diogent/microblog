@@ -1,24 +1,15 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import "../Styles/StartPage/start-page-container.scss";
 
 const GetStarted = () => (
-      <div className="main">
-        <div className="header">
-          <div className="menu">
-            <ul>
-              <li>
-                <NavLink to = "/Login">
-                  <button className="round-btn">Login</button>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to = "/Register">
-                  <button className="round-btn">Register</button>
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div className="container__startpage">
+        <NavLink to = "/Login">
+          <button className="button">Login</button>
+        </NavLink>
+        <NavLink to = "/Register">
+          <button className="button">Register</button>
+        </NavLink>
       </div>
 );
 

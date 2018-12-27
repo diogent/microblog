@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import { createPost, getPostsByUser } from "../redux/actions/CreatePost";
+import Container from "./Container";
 
 class CreateNewPost extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userName: this.props.user,
+      userName: props.user.userName,
       post: '',
       image: '',
       error: ''
@@ -53,21 +54,21 @@ class CreateNewPost extends Component {
   }
 
   componentDidMount() {
-    this.props.getFilteredByUser(this.props.user);
+    this.props.getFilteredByUser(this.props.user.userName);
   }
 
   displayPosts() {
-    return this.props.posts.items.map(post => {
+    return this.props.posts.map(post => {
       return (
-        <div>
-          <div>
+        <div className="post" key={post.id}>
+          <div className="post__name" >
             @{post.userName}
           </div>
-          <div>
+          <div className="post__content">
             <p>{post.post}</p>
           </div>
-            <img src={post.image}/>
-            <div>{post.date}</div>
+            <img src={post.image} className="post__image"/>
+            <div className="post__date">{post.date}</div>
         </div>
 
       );
@@ -75,44 +76,43 @@ class CreateNewPost extends Component {
   }
 
   render(){
-    const { items, isLoading } = this.props.posts;
-
-    if (isLoading) {
+    if (this.props.isLoading) {
       return <div>Loading...</div>
     }
 
     return (
-      <div>
+      <Container>
         <NavLink to = "/Feed">
-          <button className="round-btn">Feed</button>
+          <button className="button">Feed</button>
         </NavLink>
-        <form >
-          <div>
-            <label> Text </label>
-            <input type="text" onChange={(event) => this.handleInputChange(event, 'post')}/>
-          </div>
-          <div>
-            <input type="file" name="imgUpload" accept='.png' onChange={this.getImageBase64} />
-          </div>
-          <div>
-            <button type="button" onClick = {this.createPost}>Create new post</button>
-          </div>
-        </form>
+        <div className="post">
+          <form className="form">
+            <div>
+              <label className="post__name"> Text </label>
+            </div>
+            <div>
+              <textarea className="form__textarea" type="text" onChange={(event) => this.handleInputChange(event, 'post')}/>
+            </div>
+            <div>
+              <input type="file" className="form__buttons" name="imgUpload" accept='.png' onChange={this.getImageBase64} />
+            </div>
+            <div>
+              <button type="button" className="button form__buttons" onClick = {this.createPost}>Create new post</button>
+            </div>
+          </form>
+        </div>
 
         <div>{this.displayPosts()}</div>
-
-      </div>
+      </Container>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ auth: {user}, post: {isLoading, posts} }) => {
   return {
-    user: state.auth.user.userName,
-    posts: {
-      isLoading: state.post.isLoading,
-      items: state.post.posts
-    }
+    user,
+    isLoading,
+    posts
   }
 }
 

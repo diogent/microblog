@@ -2,7 +2,8 @@ import actions from "../constants/constActions"
 
 
 const initState = {
-  isLoading: true
+  isLoading: true,
+  posts: []
 };
 
 const postReducer = (state = initState, action) => {

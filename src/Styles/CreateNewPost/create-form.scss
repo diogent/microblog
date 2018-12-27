@@ -1,0 +1,24 @@
+.form {
+  $form_bg_color: rgb(244, 244, 244);
+  &__container
+  {
+      display: flex;
+      flex-direction: column;
+
+      border-radius: 10px;
+      background-color: $form_bg_color;
+  }
+
+  &__textarea
+  {
+      width: 838px;
+      height: 123px;
+      margin: 2%;
+  }
+
+  &__buttons
+  {
+      margin: 2%;
+  }
+
+}

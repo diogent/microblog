@@ -1,0 +1,161 @@
+$font-family: 'Roboto';
+$font-size: 14px;
+
+$color-primary: #aba194;
+
+.user
+{
+    width: 90%;
+    max-width: 340px;
+    margin: 10vh auto;
+
+    &__header {
+      transform: translate3d(0, 500px, 0);
+      animation: arrive 500ms ease-in-out .7s forwards;
+      text-align: center;
+
+      opacity: 0;
+    }
+
+    &__title {
+      font-size: $font-size;
+      font-weight: 500;
+
+      margin-bottom: -10px;
+
+      color: white;
+    }
+}
+
+
+.form
+{
+    overflow: hidden;
+
+    margin-top: 40px;
+
+    transform: translate3d(0, 500px, 0);
+    animation: arrive 500ms ease-in-out .9s forwards;
+
+    opacity: 0;
+    border-radius: 6px;
+
+    &__input {
+      font-family: $font-family;
+
+      display: block;
+
+      width: 100%;
+      padding: 20px;
+
+      transition: .3s;
+
+      border: 0;
+      outline: 0;
+
+      -webkit-appearance: none;
+
+      &:focus
+      {
+          background: darken(#fff, 3%);
+      }
+    }
+}
+
+.btn
+{
+    font-family: $font-family;
+
+    display: block;
+
+    width: 100%;
+    padding: 20px;
+
+    transition: .3s;
+
+    color: white;
+    border: 0;
+    outline: 0;
+    background: $color-primary;
+
+    -webkit-appearance: none;
+
+    &:hover
+    {
+        background: darken($color-primary, 5%);
+    }
+}
+
+@keyframes NO
+{
+    from,
+    to
+    {
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90%
+    {
+        -webkit-transform: translate3d(-10px, 0, 0);
+                transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80%
+    {
+        -webkit-transform: translate3d(10px, 0, 0);
+                transform: translate3d(10px, 0, 0);
+    }
+}
+
+@keyframes arrive
+{
+    0%
+    {
+        transform: translate3d(0, 50px, 0);
+
+        opacity: 0;
+    }
+
+    100%
+    {
+        transform: translate3d(0, 0, 0);
+
+        opacity: 1;
+    }
+}
+
+@keyframes move
+{
+    0%
+    {
+        background-position: 0 0;
+    }
+
+    50%
+    {
+        background-position: 100% 0;
+    }
+
+    100%
+    {
+        background-position: 0 0;
+    }
+}
+
+.errors_messages
+{
+    margin: 0;
+
+    text-align: center;
+
+    color: red;
+    background-color: white;
+}
